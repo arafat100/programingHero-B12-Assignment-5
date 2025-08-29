@@ -24,12 +24,6 @@ for (const call of callClick) {
             alert("calling national emergency service 999")
             const coinFinal = coinTotal - coinNumber;
             document.getElementById("coin").innerText = coinFinal;
-            // call history
-            const data = {
-                name: "National Emergency Number",
-                date: new Date().toLocaleTimeString()
-            }
-            callHistoryData.push(data)
 
             return
         }
@@ -38,6 +32,8 @@ for (const call of callClick) {
         }
     });
 }
+
+
 
 
 // copy
@@ -54,10 +50,55 @@ for (const copy of copyClick) {
     });
 }
 
-// Call History
-const callHistoryData = []
 
 
+
+// Select all call buttons
+const callButtons = document.querySelectorAll(".call-click");
+const callHistory = document.getElementById("callHistory");
+const clearBtn = document.querySelector(".clear-btn");
+
+
+for (const button of callButtons) {
+    button.addEventListener("click", function () {
+
+
+        const coinNumber = 20;
+        const coinTotal = parseInt(document.getElementById("coin").innerText);
+
+        if (coinTotal >= coinNumber) {
+
+
+            const card = this.closest(".col-card");
+
+            const serviceName = card.querySelector("h1").innerText;
+            const serviceNumber = card.querySelector("h2").innerText;
+
+
+            const entry = document.createElement("div");
+            entry.className = "flex items-center justify-between gap-5 bg-[#FAFAFA] p-4 rounded shadow-sm mb-2";
+            entry.innerHTML = `
+          <div>
+              <h1 class="font-bold">${serviceName}</h1>
+              <p class="text-gray-600">${serviceNumber}</p>
+          </div>
+          <div class="text-gray-500 text-sm">
+            Today ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}
+          </div>
+        `;
+
+            callHistory.appendChild(entry);
+
+        }
+
+    });
+};
+
+
+// Clear history button
+clearBtn.addEventListener("click", function () {
+    callHistory.innerHTML = "";
+});
 
 
 
