@@ -24,6 +24,13 @@ for (const call of callClick) {
             alert("calling national emergency service 999")
             const coinFinal = coinTotal - coinNumber;
             document.getElementById("coin").innerText = coinFinal;
+            // call history
+            const data = {
+                name: "National Emergency Number",
+                date: new Date().toLocaleTimeString()
+            }
+            callHistoryData.push(data)
+
             return
         }
         else {
@@ -46,6 +53,9 @@ for (const copy of copyClick) {
         document.getElementById("coin").innerText = coinFinal;
     });
 }
+
+// Call History
+const callHistoryData = []
 
 
 
